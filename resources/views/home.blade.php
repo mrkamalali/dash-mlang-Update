@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    {{ __('site.status') }}
                 </div>
             </div>
         </div>

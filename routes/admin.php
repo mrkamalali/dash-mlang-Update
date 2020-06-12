@@ -18,7 +18,7 @@ Route::group(
 
 //      Admin Guard
             Route::group(['middleware' => 'admin:admin'], function () {
-                Route::get('/', function () {
+                Route::get('/discover', function () {
                     return view('admin.home');
                 })->name('admin.home');
 

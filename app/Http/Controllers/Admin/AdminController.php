@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\MessageBag;
 
 
 class AdminController extends Controller
@@ -38,11 +40,14 @@ class AdminController extends Controller
         $data = $request->only('email', 'password');
         if (auth()->guard('admin')->attempt($data)) {
             // Authentication passed...
+
             return redirect()->route('admin.home');
 
         }
 
-        return redirect()->back();
+//        Show Error Validation Message For Failed Login
+        $error = new MessageBag(['password' => __('site.wrongLogin')]);
+        return redirect()->back()->withErrors($error);
 
 
     }
@@ -72,7 +77,7 @@ class AdminController extends Controller
     public function logout()
     {
         auth()->guard('admin')->logout();
-        return redirect('admin/register');
+        return redirect('admin/login');
     }
 
 

@@ -17,16 +17,18 @@ Route::group(
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ], function () {
-Route::get('/', function () {
-    return view('welcome');
-});
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
 //Route::view('admin', 'admin');
 
 
-Auth::routes();
+    Auth::routes();
+    Route::get('/home', 'HomeController@index');
+
 });
 
 
-Route::get('/home', 'HomeController@index');
 
+//Route::get('/logout','Auth\LoginController@logout');
